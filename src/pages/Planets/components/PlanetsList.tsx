@@ -5,15 +5,25 @@ import { useQuery } from "@tanstack/react-query";
 import SearchInput from "@/components/Search/SearchInput";
 import PlanetContainer from "./PlanetContainer";
 import { getAllPlanets } from "@/api/planets/getAllPlanets";
+import useDebounce from "@/hooks/useDebounce";
 
 const GET_ALL_PLANETS_KEY = "GET_ALL_PLANETS_KEY";
 
 const PlanetsList = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [filters, setFilters] = useState({ name: "" });
+  const [filters, setFilters] = useState({ search: "" });
+  const debouncedSearch = useDebounce(filters.search, 500);
   const { data: planetsData, isFetching } = useQuery({
-    queryKey: [GET_ALL_PLANETS_KEY, filters, currentPage],
-    queryFn: () => getAllPlanets({ pageParam: currentPage, filters }),
+    queryKey: [
+      GET_ALL_PLANETS_KEY,
+      { ...filters, search: debouncedSearch },
+      currentPage,
+    ],
+    queryFn: () =>
+      getAllPlanets({
+        pageParam: currentPage,
+        filters: { ...filters, search: debouncedSearch },
+      }),
     refetchOnWindowFocus: false,
     staleTime: 1000 * 60 * 5,
     retry: 2,

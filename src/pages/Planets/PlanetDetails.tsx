@@ -23,7 +23,7 @@ const PlanetDetails = () => {
 
   const planetResidents = planet?.residents || [];
 
-  const { data: charactersData, isLoading } = useQuery({
+  const { data: charactersData, isLoading: isLoadingCharacters } = useQuery({
     queryKey: [GET_PLANET_CHARACTERS_KEY, planet?.residents],
     queryFn: () => getCharactersFromPlanet(planetResidents),
     retry: 2,
@@ -34,10 +34,10 @@ const PlanetDetails = () => {
   const goBack = () => {
     navigate(-1);
   };
-  console.log(planet);
+
   if (isLoadingPlanet)
     return (
-      <div className="flex  place-content-center h-screen w-full ">
+      <div className="flex  place-content-center h-screen w-full bg-black/90 ">
         <Loading size="lg" color="white" />
       </div>
     );
@@ -64,52 +64,49 @@ const PlanetDetails = () => {
         </div>
       </div>
       <div className="flex w-full min-h-screen gap-2">
-        {!isLoading ? (
-          <div className="flex w-full h-full flex-col justify-center gap-2">
-            <div className="flex flex-wrap justify-center">
-              <ItemDetail label="Diámetro" value={planet.diameter} />
-              <ItemDetail label="Población" value={planet.population} />
-              <ItemDetail
-                label="Periodo de rotación"
-                value={planet.rotation_period}
-              />
-              <ItemDetail
-                label="Periodo orbital"
-                value={planet.orbital_period}
-              />
-              <ItemDetail label="Gravedad" value={planet.gravity} />
-              <ItemDetail label="Terreno" value={planet.terrain} />
-              <ItemDetail label="Clima" value={planet.climate} />
-              <ItemDetail
-                label="Superficie de agua"
-                value={planet.surface_water}
-                isLastItem
-              />
+        <div className="flex w-full h-full flex-col justify-center gap-2">
+          <div className="flex flex-wrap justify-center">
+            <ItemDetail label="Diámetro" value={planet.diameter} />
+            <ItemDetail label="Población" value={planet.population} />
+            <ItemDetail
+              label="Periodo de rotación"
+              value={planet.rotation_period}
+            />
+            <ItemDetail label="Periodo orbital" value={planet.orbital_period} />
+            <ItemDetail label="Gravedad" value={planet.gravity} />
+            <ItemDetail label="Terreno" value={planet.terrain} />
+            <ItemDetail label="Clima" value={planet.climate} />
+            <ItemDetail
+              label="Superficie de agua"
+              value={planet.surface_water}
+              isLastItem
+            />
+          </div>
+          <div className="flex flex-col justify-center">
+            <div className="flex justify-center py-4">
+              <h2 className="text-2xl font-bold text-white">Residentes</h2>
             </div>
-            <div className="flex flex-col justify-center">
-              <div className="flex justify-center py-4">
-                <h2 className="text-2xl font-bold text-white">Residentes</h2>
-              </div>
-              {characters.length !== 0 ? (
+            {!isLoadingCharacters ? (
+              !!characters.length ? (
                 <div className="flex flex-wrap justify-center gap-4">
                   {characters.map((character, index) => {
                     return <CharacterCard key={index} character={character} />;
                   })}
                 </div>
               ) : (
-                <div className="flex flex-col justify-center items-center gap-4">
-                  <h2 className="text-2xl  text-white">
-                    No hay residentes en este planeta
+                <div className="flex flex-wrap justify-center gap-4">
+                  <h2 className="text-2xl font-bold text-white">
+                    No hay residentes
                   </h2>
                 </div>
-              )}
-            </div>
+              )
+            ) : (
+              <div className="flex w-full h-full items-start justify-center">
+                <Loading size="lg" color="white" />
+              </div>
+            )}
           </div>
-        ) : (
-          <div className="flex w-full h-full items-start justify-center">
-            <Loading size="lg" color="secondary" />
-          </div>
-        )}
+        </div>
       </div>
     </section>
   );

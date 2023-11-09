@@ -11,14 +11,9 @@ export const getAllSpaceships = async ({
   pageParam: number;
   filters: SpaceshipFilters;
 }) => {
-  let url = `${STARWARS_API}starships/?page=${pageParam}`;
-
-  Object.keys(filters).forEach((property) => {
-    const key = property as keyof SpaceshipFilters;
-    if (filters[key]) {
-      url = url.concat(`&${key}=${filters[key]}`);
-    }
-  });
+  let url = `${STARWARS_API}starships/?`;
+  if (filters.search) url += `search=${filters.search}`;
+  if (!filters.search && pageParam) url += `page=${pageParam}`;
 
   const response = await axios<SpaceshipsAPI>(url);
 

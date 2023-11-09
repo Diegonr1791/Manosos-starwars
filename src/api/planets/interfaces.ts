@@ -23,7 +23,7 @@ export interface PlanetsResult {
 }
 
 export interface PlanetsFilters {
-  name: string;
+  search: string;
 }
 
 export interface PlanetsResultFormatted extends PlanetsResult {

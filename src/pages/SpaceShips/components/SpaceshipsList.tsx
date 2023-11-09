@@ -5,15 +5,25 @@ import { useQuery } from "@tanstack/react-query";
 import SearchInput from "@/components/Search/SearchInput";
 import SpaceshipContainer from "./SpaceshipContainer";
 import { getAllSpaceships } from "@/api/spaceships/getAllSpaceShips";
+import useDebounce from "@/hooks/useDebounce";
 
 const GET_ALL_SPACESHIPS_KEY = "GET_ALL_SPACESHIPS_KEY";
 
 const SpaceshipsList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [filters, setFilters] = useState({ search: "" });
+  const debouncedSearch = useDebounce(filters.search, 500);
   const { data: spaceshipsData, isFetching } = useQuery({
-    queryKey: [GET_ALL_SPACESHIPS_KEY, filters, currentPage],
-    queryFn: () => getAllSpaceships({ pageParam: currentPage, filters }),
+    queryKey: [
+      GET_ALL_SPACESHIPS_KEY,
+      { ...filters, search: debouncedSearch },
+      currentPage,
+    ],
+    queryFn: () =>
+      getAllSpaceships({
+        pageParam: currentPage,
+        filters: { ...filters, search: debouncedSearch },
+      }),
     refetchOnWindowFocus: false,
     staleTime: 1000 * 60 * 5,
     retry: 2,

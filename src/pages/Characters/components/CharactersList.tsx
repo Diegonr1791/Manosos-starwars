@@ -5,15 +5,25 @@ import { useQuery } from "@tanstack/react-query";
 import { getAllCharacters } from "@/api/characters/getAllCharacters";
 import SearchInput from "@/components/Search/SearchInput";
 import CharacterContainer from "./CharacterContainer";
+import useDebounce from "@/hooks/useDebounce";
 
 const GET_ALL_CHARACTERS_KEY = "GET_ALL_CHARACTERS_KEY";
 
 const CharactersList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [filters, setFilters] = useState({ search: "" });
+  const debouncedSearch = useDebounce(filters.search, 500);
   const { data: charactersData, isFetching } = useQuery({
-    queryKey: [GET_ALL_CHARACTERS_KEY, filters, currentPage],
-    queryFn: () => getAllCharacters({ pageParam: currentPage, filters }),
+    queryKey: [
+      GET_ALL_CHARACTERS_KEY,
+      { ...filters, search: debouncedSearch },
+      currentPage,
+    ],
+    queryFn: () =>
+      getAllCharacters({
+        pageParam: currentPage,
+        filters: { ...filters, search: debouncedSearch },
+      }),
     refetchOnWindowFocus: false,
     staleTime: 1000 * 60 * 5,
     retry: 2,

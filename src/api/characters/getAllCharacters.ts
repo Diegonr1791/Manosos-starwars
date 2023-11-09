@@ -11,14 +11,9 @@ export const getAllCharacters = async ({
   pageParam: number;
   filters: CharactersFilters;
 }) => {
-  let url = `${STARWARS_API}people/?page=${pageParam}`;
-
-  Object.keys(filters).forEach((property) => {
-    const key = property as keyof CharactersFilters;
-    if (filters[key]) {
-      url = url.concat(`&${key}=${filters[key]}`);
-    }
-  });
+  let url = `${STARWARS_API}people/?`;
+  if (filters.search) url += `search=${filters.search}`;
+  if (!filters.search && pageParam) url += `page=${pageParam}`;
 
   const response = await axios<CharactersAPI>(url);
 

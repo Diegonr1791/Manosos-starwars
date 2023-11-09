@@ -12,14 +12,9 @@ export const getAllPlanets = async ({
   pageParam: number;
   filters: PlanetsFilters;
 }) => {
-  let url = `${STARWARS_API}planets/?page=${pageParam}`;
-
-  Object.keys(filters).forEach((property) => {
-    const key = property as keyof PlanetsFilters;
-    if (filters[key]) {
-      url = url.concat(`&${key}=${filters[key]}`);
-    }
-  });
+  let url = `${STARWARS_API}planets/?`;
+  if (filters.search) url += `search=${filters.search}`;
+  if (!filters.search && pageParam) url += `page=${pageParam}`;
 
   const response = await axios<PlanetsAPI>(url);
 

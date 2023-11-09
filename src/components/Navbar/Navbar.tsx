@@ -6,6 +6,7 @@ import {
   NavbarMenu,
   NavbarContent,
   NavbarItem,
+  Link as LinkUi,
 } from "@nextui-org/react";
 import LogoRM from "@/assets/images/logoSW.png";
 import { navigationMenu } from "@/constants/navigation";
@@ -72,7 +73,7 @@ const Menu = ({ color }: { color: string }) => {
               key={`${item.name}-${index}`}
               className="border-b-1 border-white"
             >
-              <Link
+              <LinkUi
                 className={cn(
                   `w-full  font-semibold hover:text-white/70 transition duration-300  hover:ease-in-out text-lg`,
                   {
@@ -80,10 +81,10 @@ const Menu = ({ color }: { color: string }) => {
                     "text-white font-semibold": isActive,
                   }
                 )}
-                to={item.path}
+                href={item.path}
               >
                 {item.name}
-              </Link>
+              </LinkUi>
             </NavbarMenuItem>
           );
         })}
