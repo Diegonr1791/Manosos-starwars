@@ -38,12 +38,16 @@ Siga estos pasos para levantar localmente el proyecto en su máquina:
 
 2. **Agregar el .env local:**
 
-Una vez clonado el repositorio, ingresar al mismo y crear un archivo .env con la siguiente variable de entorno STARWARS_API=https://swapi.dev/api/
+   Una vez clonado el repositorio, ingresar al mismo y crear un archivo .env con la siguiente variable de entorno STARWARS_API=https://swapi.dev/api/
 
 3. **Correr el comando yarn:**
 
-Luego de crear el .env y abierto el proyecto en el editor de codigo de preferencia, se debe correr el comando yarn
+   Luego de crear el .env y abierto el proyecto en el editor de codigo de preferencia, se debe correr el comando yarn
 
 4. **Levantar el proyecto:**
 
-Para finalizar solo se debe correr el comando yarn dev y el proyecto se inizializara con un puerto por defecto
+   Para finalizar solo se debe correr el comando yarn dev y el proyecto se inizializara con un puerto por defecto
+
+### Sitio deployado
+
+https://manosos-starwars.netlify.app

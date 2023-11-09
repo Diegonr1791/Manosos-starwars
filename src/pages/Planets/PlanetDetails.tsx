@@ -15,7 +15,7 @@ const PlanetDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const { data: planet } = useQuery({
+  const { data: planet, isLoading: isLoadingPlanet } = useQuery({
     queryKey: [GET_PLANET_BY_ID_KEY, id],
     queryFn: () => getPlanetDetails(String(id)),
     retry: 2,
@@ -23,28 +23,28 @@ const PlanetDetails = () => {
 
   const planetResidents = planet?.residents || [];
 
-  const { data: characters, isLoading: isLoadingCharacters } = useQuery({
+  const { data: charactersData, isLoading } = useQuery({
     queryKey: [GET_PLANET_CHARACTERS_KEY, planet?.residents],
     queryFn: () => getCharactersFromPlanet(planetResidents),
     retry: 2,
     enabled: !!planet?.residents,
   });
 
+  const characters = charactersData || [];
   const goBack = () => {
     navigate(-1);
   };
-
-  if (!planet) return;
-  if (isLoadingCharacters)
+  console.log(planet);
+  if (isLoadingPlanet)
     return (
       <div className="flex  place-content-center h-screen w-full ">
         <Loading size="lg" color="white" />
       </div>
     );
-  if (!characters)
+  if (!planet)
     return (
       <div className="flex  place-content-center h-screen w-full">
-        <NotFoundPage name="Characters" color="bg-orange-950/70" />;
+        <NotFoundPage name="Planet" color="bg-black/80" />;
       </div>
     );
 
@@ -64,7 +64,7 @@ const PlanetDetails = () => {
         </div>
       </div>
       <div className="flex w-full min-h-screen gap-2">
-        {!isLoadingCharacters ? (
+        {!isLoading ? (
           <div className="flex w-full h-full flex-col justify-center gap-2">
             <div className="flex flex-wrap justify-center">
               <ItemDetail label="Diámetro" value={planet.diameter} />

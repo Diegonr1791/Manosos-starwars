@@ -45,7 +45,7 @@ const Menu = ({ color }: { color: string }) => {
         {navigationMenu.map((item, index) => {
           const isActive = pathName.includes(item.path);
           const activeColor = isActive
-            ? "text-black underline underline-offset-4"
+            ? "text-white underline underline-offset-4 font-semibold"
             : "text-white";
 
           return (
@@ -53,7 +53,7 @@ const Menu = ({ color }: { color: string }) => {
               <Link
                 to={item.path}
                 className={cn(
-                  `w-full  font-semibold hover:text-white/70 transition duration-300  hover:ease-in-out text-lg`,
+                  `w-full hover:text-white/70 transition duration-300  hover:ease-in-out text-lg`,
                   activeColor
                 )}
               >
@@ -75,7 +75,10 @@ const Menu = ({ color }: { color: string }) => {
               <Link
                 className={cn(
                   `w-full  font-semibold hover:text-white/70 transition duration-300  hover:ease-in-out text-lg`,
-                  { "text-white": !isActive, "text-black": isActive }
+                  {
+                    "text-white/70": !isActive,
+                    "text-white font-semibold": isActive,
+                  }
                 )}
                 to={item.path}
               >

@@ -32,7 +32,7 @@ const SpaceshipsList = () => {
           <SearchInput
             name="search"
             onChange={onFilterChange}
-            placeholder="Buscar nave"
+            placeholder="Buscar nave por nombre o modelo"
           />
         </div>
         <div className="flex justify-end">

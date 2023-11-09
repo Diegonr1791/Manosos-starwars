@@ -10,7 +10,7 @@ const GET_ALL_CHARACTERS_KEY = "GET_ALL_CHARACTERS_KEY";
 
 const CharactersList = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [filters, setFilters] = useState({ name: "" });
+  const [filters, setFilters] = useState({ search: "" });
   const { data: charactersData, isFetching } = useQuery({
     queryKey: [GET_ALL_CHARACTERS_KEY, filters, currentPage],
     queryFn: () => getAllCharacters({ pageParam: currentPage, filters }),
@@ -32,7 +32,7 @@ const CharactersList = () => {
           <SearchInput
             name="search"
             onChange={onFilterChange}
-            placeholder="Buscar personaje"
+            placeholder="Buscar personaje por nombre"
           />
         </div>
         <div className="flex justify-end">

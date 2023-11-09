@@ -15,7 +15,7 @@ const CharacterContainer = ({
     navigate(`/planets/${id}`);
   };
 
-  if (planets.length === 0) return <NotFoundPage name="Character" />;
+  if (planets.length === 0) return <NotFoundPage name="Planet" />;
 
   return (
     <div className="flex flex-wrap justify-center gap-3">

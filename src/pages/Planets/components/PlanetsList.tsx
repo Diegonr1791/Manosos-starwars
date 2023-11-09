@@ -32,7 +32,7 @@ const PlanetsList = () => {
           <SearchInput
             name="search"
             onChange={onFilterChange}
-            placeholder="Buscar planeta"
+            placeholder="Buscar planeta por nombre"
           />
         </div>
         <div className="flex justify-end">

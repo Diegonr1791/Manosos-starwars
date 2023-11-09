@@ -31,5 +31,5 @@ export enum Gender {
 }
 
 export interface CharactersFilters {
-  name: string;
+  search: string;
 }
