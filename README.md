@@ -1,27 +1,49 @@
-# React + TypeScript + Vite
+# Star Wars Wiki
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este proyecto es una Wiki de Star Wars construida con React, Vite y TypeScript. Proporciona información detallada sobre personajes, planetas, naves y más utilizando la Star Wars API.
 
-Currently, two official plugins are available:
+## Desafío
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+El desafío consiste en crear una aplicación web interactiva que permita a los usuarios explorar la extensa galaxia de Star Wars. Debe consumir datos de la Star Wars API (SWAPI) y presentar la información de manera organizada y atractiva.
 
-## Expanding the ESLint configuration
+### Requisitos del desafío:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+1. **Página de Personajes:** Mostrar una lista de personajes con detalles completos al hacer clic en cada uno.
 
-- Configure the top-level `parserOptions` property like this:
+2. **Página de Planetas:** Visualizar información detallada sobre los planetas y de los residentes de cada uno de ellos.
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+3. **Página de Naves:** Mostrar una lista de naves con detalles completos al hacer clic en cada uno.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+4. **Búsqueda:** Implementar una funcionalidad de búsqueda que permita a los usuarios encontrar rápidamente la información que están buscando.
+
+5. **Estilo y Diseño:** Aplicar estilos atractivos y un diseño intuitivo para mejorar la experiencia del usuario.
+
+## Cómo levantar el proyecto
+
+Siga estos pasos para levantar localmente el proyecto en su máquina:
+
+### Prerrequisitos
+
+- Node.js instalado
+- Gestor de paquetes yarn
+
+### Pasos
+
+1. **Clonar el repositorio:**
+
+   ```bash
+   git clone https://github.com/Diegonr1791/Manosos-starwars.git
+
+   ```
+
+2. **Agregar el .env local:**
+
+Una vez clonado el repositorio, ingresar al mismo y crear un archivo .env con la siguiente variable de entorno STARWARS_API=https://swapi.dev/api/
+
+3. **Correr el comando yarn:**
+
+Luego de crear el .env y abierto el proyecto en el editor de codigo de preferencia, se debe correr el comando yarn
+
+4. **Levantar el proyecto:**
+
+Para finalizar solo se debe correr el comando yarn dev y el proyecto se inizializara con un puerto por defecto

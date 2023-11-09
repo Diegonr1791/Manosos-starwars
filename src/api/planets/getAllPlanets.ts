@@ -1,5 +1,6 @@
 import axios from "axios";
 import { PlanetsAPI, PlanetsFilters } from "./interfaces";
+import planetsAdapter from "./adapters/planetsAdapter";
 
 const STARWARS_API = import.meta.env.STARWARS_API || "https://swapi.dev/api/";
 const DEFAULT_PLANETS_ERROR_MESSAGE = "Error fetching planets";
@@ -25,7 +26,7 @@ export const getAllPlanets = async ({
   if (!response) throw new Error(DEFAULT_PLANETS_ERROR_MESSAGE);
 
   const data = response.data;
-  const planets = data.results;
+  const planets = planetsAdapter({ planets: data.results });
   const hasNextPage = data.next !== null;
   const pegeCount = Math.ceil(data.count / planets.length);
 

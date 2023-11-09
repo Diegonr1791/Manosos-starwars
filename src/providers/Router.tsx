@@ -6,7 +6,9 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 const HomePage = lazy(() => import("@/pages/Home/Home"));
 const CharactersPage = lazy(() => import("@/pages/Characters/Characters"));
 const PlanetsPage = lazy(() => import("@/pages/Planets/Planets"));
-const ShipsPage = lazy(() => import("@/pages/SpaceCrafts/SpaceCrafts"));
+const PlanetDetailsPage = lazy(() => import("@/pages/Planets/PlanetDetails"));
+
+const SpaceshipsPage = lazy(() => import("@/pages/SpaceShips/SpaceShips"));
 
 const Router = () => {
   return (
@@ -35,9 +37,18 @@ const Router = () => {
               }
             />
             <Route
-              path="/spacecrafts"
+              path="/planets/:id"
               index
-              element={<Layout children={<ShipsPage />} color="bg-black/80" />}
+              element={
+                <Layout children={<PlanetDetailsPage />} color="bg-black/80" />
+              }
+            />
+            <Route
+              path="/spaceships"
+              index
+              element={
+                <Layout children={<SpaceshipsPage />} color="bg-black/80" />
+              }
             />
           </Routes>
         </Suspense>

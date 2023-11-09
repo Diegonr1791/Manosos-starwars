@@ -1,6 +1,5 @@
 import { CharactersResult } from "@/api/characters/interfaces";
-import CardCharacter from "@/components/Cards/Card";
-import yoda from "@/assets/images/yoda.png";
+import CharacterCard from "@/pages/Characters/components/CharacterCard";
 import NotFoundPage from "@/pages/NotFound/NotFoundPage";
 
 const CharacterContainer = ({
@@ -12,12 +11,7 @@ const CharacterContainer = ({
   return (
     <div className="flex flex-wrap justify-center gap-3">
       {characters.map((character, index) => (
-        <CardCharacter
-          key={`${character.name}-${index}`}
-          name={character.name}
-          onClick={() => console.log()}
-          image={yoda}
-        />
+        <CharacterCard key={index} character={character} />
       ))}
     </div>
   );

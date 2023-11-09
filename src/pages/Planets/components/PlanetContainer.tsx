@@ -1,18 +1,31 @@
-import CardCharacter from "@/components/Cards/Card";
-import yoda from "@/assets/images/yoda.png";
+import planetCard from "@/assets/images/planetCard.png";
 import NotFoundPage from "@/pages/NotFound/NotFoundPage";
-import { PlanetsResult } from "@/api/planets/interfaces";
+import { PlanetsResultFormatted } from "@/api/planets/interfaces";
+import { useNavigate } from "react-router-dom";
+import CardPlanets from "@/components/Cards/CardPlanets";
 
-const CharacterContainer = ({ planets }: { planets: PlanetsResult[] }) => {
+const CharacterContainer = ({
+  planets,
+}: {
+  planets: PlanetsResultFormatted[];
+}) => {
+  const navigate = useNavigate();
+
+  const onCardClick = (id: string) => {
+    navigate(`/planets/${id}`);
+  };
+
   if (planets.length === 0) return <NotFoundPage name="Character" />;
+
   return (
     <div className="flex flex-wrap justify-center gap-3">
       {planets.map((planet, index) => (
-        <CardCharacter
+        <CardPlanets
           key={`${planet.name}-${index}`}
+          id={planet.id}
           name={planet.name}
-          onClick={() => console.log()}
-          image={yoda}
+          onCardClick={onCardClick}
+          image={planetCard}
         />
       ))}
     </div>

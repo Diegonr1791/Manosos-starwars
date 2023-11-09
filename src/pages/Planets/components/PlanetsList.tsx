@@ -19,7 +19,7 @@ const PlanetsList = () => {
     retry: 2,
   });
 
-  const characters = planetsData?.results || [];
+  const planets = planetsData?.results || [];
 
   const onFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFilters({ ...filters, [e.target.name]: e.target.value });
@@ -29,7 +29,11 @@ const PlanetsList = () => {
     <div className="flex w-full flex-col p-3">
       <div className="flex flex-col md:flex-row w-full justify-between pb-4 gap-3 ">
         <div className="flex w-full">
-          <SearchInput onChange={onFilterChange} placeholder="Search planet" />
+          <SearchInput
+            name="search"
+            onChange={onFilterChange}
+            placeholder="Buscar planeta"
+          />
         </div>
         <div className="flex justify-end">
           <Pagination
@@ -37,12 +41,13 @@ const PlanetsList = () => {
             initialPage={1}
             page={currentPage}
             onChange={setCurrentPage}
+            isDisabled={planets.length === 0}
           />
         </div>
       </div>
-      <div className="flex">
+      <div className="flex pt-3">
         {!isFetching ? (
-          <PlanetContainer planets={characters} />
+          <PlanetContainer planets={planets} />
         ) : (
           <div className="flex w-full h-full items-start justify-center">
             <Loading size="lg" color="white" />

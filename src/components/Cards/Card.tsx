@@ -1,4 +1,4 @@
-import { Card, CardFooter, Image } from "@nextui-org/react";
+import { Card as CardComponent, CardFooter, Image } from "@nextui-org/react";
 
 type CardCharacterProps = {
   name: string;
@@ -6,9 +6,9 @@ type CardCharacterProps = {
   onClick?: () => void;
 };
 
-export const CardCharacter = ({ name, image, onClick }: CardCharacterProps) => {
+export const Card = ({ name, image, onClick }: CardCharacterProps) => {
   return (
-    <Card className="bg-white/90 rounded-md p-3 hover:shadow-md hover:shadow-violet-400/60 hover:rotate-[2deg] transition-all duration-1000 group">
+    <CardComponent className="bg-white/90 rounded-md p-3 hover:shadow-md hover:shadow-violet-400/60 hover:rotate-[2deg] transition-all duration-1000 group">
       <Image
         alt={`image for card}-${name}`}
         className="min-w-[150px] max-w-[200px] object-cover rounded-none border-x-3 border-b-3  border-gray-900/90 group-hover:rotate-[-2deg]"
@@ -24,15 +24,15 @@ export const CardCharacter = ({ name, image, onClick }: CardCharacterProps) => {
           <div className=" absolute inset-0 h-full w-full [transform:rotateY(180deg)] [backface-visibility:hidden]">
             <p
               onClick={onClick}
-              className="bg-purple-700 text-center text-lg text-white border-3 border-gray-900  rounded-md mx-5 hover:cursor-pointer"
+              className="bg-orange-600 text-center text-lg text-white border-3 border-gray-900  rounded-md mx-5 hover:cursor-pointer"
             >
               Ver detalles
             </p>
           </div>
         </div>
       </CardFooter>
-    </Card>
+    </CardComponent>
   );
 };
 
-export default CardCharacter;
+export default Card;

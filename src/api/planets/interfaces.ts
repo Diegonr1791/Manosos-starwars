@@ -25,3 +25,8 @@ export interface PlanetsResult {
 export interface PlanetsFilters {
   name: string;
 }
+
+export interface PlanetsResultFormatted extends PlanetsResult {
+  id: string;
+  characters?: string[];
+}

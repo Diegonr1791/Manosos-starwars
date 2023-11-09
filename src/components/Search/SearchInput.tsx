@@ -3,12 +3,13 @@ import { Input } from "@nextui-org/react";
 type SearchInputProps = {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
+  name?: string;
 };
 
-const SearchInput = ({ onChange, placeholder }: SearchInputProps) => {
+const SearchInput = ({ onChange, placeholder, name }: SearchInputProps) => {
   return (
     <Input
-      name="name"
+      name={name}
       classNames={{
         base: "max-w-full sm:max-w-[20rem] h-10",
         mainWrapper: "h-full",

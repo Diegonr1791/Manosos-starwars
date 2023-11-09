@@ -2,24 +2,24 @@ import { Pagination } from "@nextui-org/react";
 import Loading from "@/components/Loading/Loading";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { getAllCharacters } from "@/api/characters/getAllCharacters";
 import SearchInput from "@/components/Search/SearchInput";
-import CharacterContainer from "./CharacterContainer";
+import SpaceshipContainer from "./SpaceshipContainer";
+import { getAllSpaceships } from "@/api/spaceships/getAllSpaceShips";
 
-const GET_ALL_CHARACTERS_KEY = "GET_ALL_CHARACTERS_KEY";
+const GET_ALL_SPACESHIPS_KEY = "GET_ALL_SPACESHIPS_KEY";
 
-const CharactersList = () => {
+const SpaceshipsList = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [filters, setFilters] = useState({ name: "" });
-  const { data: charactersData, isFetching } = useQuery({
-    queryKey: [GET_ALL_CHARACTERS_KEY, filters, currentPage],
-    queryFn: () => getAllCharacters({ pageParam: currentPage, filters }),
+  const [filters, setFilters] = useState({ search: "" });
+  const { data: spaceshipsData, isFetching } = useQuery({
+    queryKey: [GET_ALL_SPACESHIPS_KEY, filters, currentPage],
+    queryFn: () => getAllSpaceships({ pageParam: currentPage, filters }),
     refetchOnWindowFocus: false,
     staleTime: 1000 * 60 * 5,
     retry: 2,
   });
 
-  const characters = charactersData?.results || [];
+  const spaceships = spaceshipsData?.results || [];
 
   const onFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFilters({ ...filters, [e.target.name]: e.target.value });
@@ -32,22 +32,22 @@ const CharactersList = () => {
           <SearchInput
             name="search"
             onChange={onFilterChange}
-            placeholder="Buscar personaje"
+            placeholder="Buscar nave"
           />
         </div>
         <div className="flex justify-end">
           <Pagination
-            total={charactersData?.pageCount || 10}
+            total={spaceshipsData?.pageCount || 10}
             initialPage={1}
             page={currentPage}
             onChange={setCurrentPage}
-            isDisabled={characters.length === 0}
+            isDisabled={spaceships.length === 0}
           />
         </div>
       </div>
       <div className="flex">
         {!isFetching ? (
-          <CharacterContainer characters={characters} />
+          <SpaceshipContainer spaceships={spaceships} />
         ) : (
           <div className="flex w-full h-full items-start justify-center">
             <Loading size="lg" color="white" />
@@ -58,4 +58,4 @@ const CharactersList = () => {
   );
 };
 
-export default CharactersList;
+export default SpaceshipsList;
